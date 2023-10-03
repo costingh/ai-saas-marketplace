@@ -10,7 +10,7 @@ import { NavBar } from "~/components/NavBar";
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
-      <div>
+      <div style={{display: 'flex'}}>
         <NavBar />
         <Component {...pageProps} />
       </div>

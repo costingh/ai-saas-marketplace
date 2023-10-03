@@ -88,16 +88,16 @@ export function NavBar() {
 			</nav> */}
 			<div className="navbar" style={{ position: 'relative' }}>
 
-				<Link href="/" className="flex items-center">
+				{/* <Link href="/" className="flex items-center">
 					<span className="self-center whitespace-nowrap text-2xl font-semibold">
 						MarketPlace
 					</span>
-				</Link>
-				<div className="right-actions">
+				</Link> */}
+				<UserButton />
+				<div className="h-divider"></div>
 
-					<Link
+				<Link
 						href="/browse"
-						className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
 						aria-current="page"
 						id="browse"
 					>
@@ -105,15 +105,15 @@ export function NavBar() {
 							<Icon icon='home' />
 						</div>
 					</Link>
-					<Tooltip anchorSelect="#browse" clickable>
+					<Tooltip anchorSelect="#browse" clickable place="right" style={{backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px'}}>
 						<button>Browse listings</button>
 					</Tooltip>
+
 
 					{user.isSignedIn && (
 						<>
 							<Link
 								href="/offers"
-								className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
 								aria-current="page"
 								id="offers"
 
@@ -122,13 +122,12 @@ export function NavBar() {
 									<Icon icon='inbox' />
 								</div>
 							</Link>
-							<Tooltip anchorSelect="#offers" clickable>
+							<Tooltip anchorSelect="#offers" clickable place="right" style={{backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px'}}>
 								<button>Show my offers</button>
 							</Tooltip>
 
 							<Link
 								href="/sell-an-item"
-								className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
 								aria-current="page"
 								id="sell"
 							>
@@ -136,19 +135,19 @@ export function NavBar() {
 									<Icon icon='sell' />
 								</div>
 							</Link>
-							<Tooltip anchorSelect="#sell" clickable>
+							<Tooltip anchorSelect="#sell" clickable place="right" style={{backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px'}}>
 								<button>Start selling</button>
 							</Tooltip>
 
 							<div className="navbar-icon-wrapper" id="upgrade">
 								<Icon icon='lightning' />
 							</div>
-							<Tooltip anchorSelect="#upgrade" clickable>
+							<Tooltip anchorSelect="#upgrade" clickable place="right" style={{backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px'}}>
 								<button>Upgrade to PRO</button>
 							</Tooltip>
 						</>
 					)}
-
+					
 
 					{!user.isSignedIn && (
 						<>
@@ -162,12 +161,6 @@ export function NavBar() {
 							<button className="btn-filled ml-3">Sign up</button>
 						</>
 					)}
-
-					<div className="v-divider"></div>
-					<UserButton />
-
-
-				</div>
 			</div>
 		</div>
 	);
