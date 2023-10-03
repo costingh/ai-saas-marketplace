@@ -24,7 +24,7 @@ const SellAnItem: NextPage = () => {
         price: parseFloat(formData.price),
       })
       .then(() => {
-        router.push("/");
+        router.push("/browse");
       });
   };
 
