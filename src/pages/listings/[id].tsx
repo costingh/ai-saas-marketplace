@@ -8,6 +8,8 @@ import { api } from "~/utils/api";
 import { useForm } from "react-hook-form";
 import Icon from "~/components/Icon";
 import InvisibleNavbar from "~/components/InvisibleNavbar";
+import Link from "next/link";
+import moment from 'moment'
 
 const ListingView: NextPage = () => {
 	const router = useRouter();
@@ -42,14 +44,16 @@ const ListingView: NextPage = () => {
 			<div style={{ width: '100%'}}>
                 <InvisibleNavbar />
                 
-				<main className="container mx-auto flex min-h-screen flex-col gap-6" style={{ background: '#efefef' }}>
+				<main className="container mx-auto flex min-h-screen flex-col gap-6">
 					<div className="container mx-auto flex flex-row gap-6" style={{ alignItems: 'self-start' }}>
-						<div className="card saas-details-wrapper">
+						<div className="card saas-details-wrapper"  style={{ border: '1px solid #efefef' }}>
 							<div className="navigation-wrapper flex w-100 justify-between">
 								<div className="left flex left">
-									<div className="icon-wrapper">
-										<Icon icon='go_back' />
-									</div>
+									<Link href="/browse">
+										<div className="icon-wrapper">
+											<Icon icon='go_back' />
+										</div>
+									</Link>
 									<span>312 people viewed this listing</span>
 								</div>
 
@@ -76,12 +80,12 @@ const ListingView: NextPage = () => {
 										<div className="title">
 											{listingItem.name}
 										</div>
-										<span className="created-at">Listed at 27.04.2023</span>
+										<span className="created-at">Listed at {moment(listingItem?.createdAt).format()}</span>
 									</div>
 								</div>
 								<div className="right flex location-wrapper">
 									<Icon icon='location' />
-									<span>United Kingdom</span>
+									<span>{listingItem.location}</span>
 								</div>
 							</div>
 
@@ -94,23 +98,23 @@ const ListingView: NextPage = () => {
 							<div className="kpis">
 								<div className="kpi">
 									<span className="muted-label">TTM PROFIT</span>
-									<p>$120k</p>
+									<p>${listingItem.ttm_profit}</p>
 								</div>
 								<div className="kpi">
 									<span className="muted-label">TTM REVENUE</span>
-									<p>$127k</p>
+									<p>${listingItem.ttm_revenue}</p>
 								</div>
 								<div className="kpi">
 									<span className="muted-label">ASKING PRICE</span>
-									<p>$800k</p>
+									<p>${listingItem.price}</p>
 								</div>
 								<div className="kpi">
 									<span className="muted-label">TEAM SIZE</span>
-									<p>3</p>
+									<p>{listingItem.team_size}</p>
 								</div>
 								<div className="kpi">
 									<span className="muted-label">DATE FOUNDED</span>
-									<p>27.01.2021</p>
+									<p>{moment(listingItem.date_founded).format()}</p>
 								</div>
 							</div>
 
@@ -123,27 +127,24 @@ const ListingView: NextPage = () => {
 								<p className='paragraph'>{listingItem.description}</p>
 
 								<div className="muted-label">Tech Stack</div>
-								<p className='paragraph'>Next.js, Stripe, Replicate, Tailwind and Vercel</p>
+								<p className='paragraph'>{listingItem.tech_stack.join(', ')}</p>
 
 								<div className="muted-label">Business Model</div>
-								<p className="paragraph">B2C £9 for 25 credits, £19.00 for 100 credits and £29.00 for 200 credits/</p>
+								<p className="paragraph">{listingItem.business_model}</p>
 
 								<div className="muted-label">Competitors</div>
-								<p className="paragraph">https://www.fotor.com/features/ai-landscape-generator/</p>
+								<p className="paragraph">{listingItem.competitors.join(', ')}</p>
 
 								<div className="muted-label">Growth opportunity</div>
 								<div className="list">
-									<p className="paragraph list-item">Do more marketing/</p>
-									<p className="paragraph list-item">Add more styles/</p>
-									<p className="paragraph list-item">Expand to other areas of home renovation/</p>
+									<p className="paragraph list-item">{listingItem.growth_opportunity}/</p>
+									{/* <p className="paragraph list-item">Add more styles/</p> */}
+									{/* <p className="paragraph list-item">Expand to other areas of home renovation/</p> */}
 								</div>
 
 								<div className="muted-label">Assets</div>
 								<div className="list">
-									<p className="paragraph list-item">Codebase and IP/</p>
-									<p className="paragraph list-item">Website/</p>
-									<p className="paragraph list-item">Domain/</p>
-									<p className="paragraph list-item">Brand/</p>
+									{listingItem.assets.map(asset => <p key={asset} className="paragraph list-item">{asset}/</p>)}
 								</div>
 							</div>
 
@@ -153,16 +154,15 @@ const ListingView: NextPage = () => {
 								<h1 className="heading-text">Aquisition details</h1>
 
 								<div className="muted-label">Reason selling</div>
-								<p className='paragraph'>I am not good with marketing and have started working on other projects.</p>
+								<p className='paragraph'>{listingItem.reason_selling}</p>
 
 								<div className="muted-label">Financing</div>
-								<p className='paragraph'>100% Bootstrapped. </p>
+								<p className='paragraph'>{listingItem.financing}</p>
 							</div>
 						</div>
 
-						<div style={{ width: '40%' }}>
-
-							<div className="metrics-overview-wrapper card no-padding-x">
+						<div style={{ width: '40%', border: '1px solid #efefef'}}>
+								<div className="metrics-overview-wrapper card no-padding-x">
 								<h1 className="heading-text">Quick overview</h1>
 								<div className="divider"></div>
 
