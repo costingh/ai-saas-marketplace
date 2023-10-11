@@ -1,28 +1,52 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Listing {
-    id          String    @id @default(cuid())
-    userId      String
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    name        String
-    description String
-    price       Float
-    message     Message[]
+  id        String   @id @default(cuid())
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // base info
+  name         String
+  description  String
+  price        Float
+  message      Message[]
+  location     String
+  ttm_profit   Float
+  ttm_revenue  Float
+  team_size    Int
+  date_founded String
+
+  // Company Overview
+  tech_stack         String[]
+  business_model     String
+  competitors        String[]
+  growth_opportunity String
+  assets             String[]
+
+  // Aquisition details
+  reason_selling String
+  financing      String
+
+  // listing analytics
+  unique_views  BigInt
+  total_views   BigInt
+  favourited    BigInt
+  offers_number BigInt
 }
 
 model Message {
-    id           String  @id @default(cuid())
-    fromUser     String
-    fromUserName String
-    listingId    String
-    message      String
-    listing      Listing @relation(fields: [listingId], references: [id])
+  id           String  @id @default(cuid())
+  fromUser     String
+  fromUserName String
+  listingId    String
+  message      String
+  listing      Listing @relation(fields: [listingId], references: [id])
 }
