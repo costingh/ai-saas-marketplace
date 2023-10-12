@@ -442,7 +442,7 @@ h1.heading-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 .navbar-icon-wrapper.active {
@@ -543,7 +543,7 @@ h1.heading-text {
 
 .btn-filled.disabled {
   cursor: not-allowed;
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .spinner {
@@ -557,8 +557,12 @@ h1.heading-text {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .invisible-navbar {
@@ -631,7 +635,7 @@ h1.heading-text {
 
 .label {
   color: #888;
-  font-size: 14px;  
+  font-size: 14px;
   margin-bottom: 5px;
   margin-top: 20px;
 }
@@ -664,7 +668,7 @@ h1.heading-text {
   color: #7c7e87;
   background-color: #edeff2;
   cursor: pointer;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
 .steps .step.active {
@@ -709,7 +713,7 @@ h1.heading-text {
   width: 100%;
   outline: none;
   border: 1px solid transparent;
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
 
 .list-application-form input:focus,
@@ -728,7 +732,7 @@ h1.heading-text {
   text-align: center;
   margin-top: 20px;
   cursor: pointer;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   border: 1px solid #5c57ec;
 }
 
@@ -743,13 +747,12 @@ h1.heading-text {
   text-align: center;
   margin-top: 20px;
   cursor: pointer;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   border: 1px solid #5c57ec;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .btn.cancel-btn {
   width: 100%;
@@ -761,13 +764,12 @@ h1.heading-text {
   font-weight: 600;
   text-align: center;
   cursor: pointer;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
   border: 1px solid #5c57ec;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .btn.next-btn:hover {
   color: #5c57ec;
@@ -786,4 +788,66 @@ h1.heading-text {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 25px;
+}
+
+/* ripple */
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #3e50f7;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+
+.product-creation-confirmation-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  margin-top: 20px;
+} 
+
+.product-creation-confirmation-paragraph {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666666;
+  margin-top: 10px;
 }
