@@ -14,10 +14,12 @@ model Listing {
   updatedAt DateTime @updatedAt
 
   // base info
-  name         String
-  description  String
-  price        Float
-  message      Message[]
+  name        String
+  description String
+  price       Float
+  message     Message[]
+  likes       Like[]
+
   location     String
   ttm_profit   Float
   ttm_revenue  Float
@@ -36,17 +38,26 @@ model Listing {
   financing      String
 
   // listing analytics
-  unique_views  BigInt
-  total_views   BigInt
-  favourited    BigInt
-  offers_number BigInt
+  // unique_views  BigInt
+  // total_views   BigInt
+  // offers_number BigInt
 }
 
 model Message {
-  id           String  @id @default(cuid())
+  id           String   @id @default(cuid())
   fromUser     String
   fromUserName String
   listingId    String
   message      String
-  listing      Listing @relation(fields: [listingId], references: [id])
+  listing      Listing  @relation(fields: [listingId], references: [id])
+  deliveredAt  DateTime @default(now())
+}
+
+model Like {
+  id           String   @id @default(cuid())
+  fromUser     String
+  fromUserName String
+  listingId    String
+  listing      Listing  @relation(fields: [listingId], references: [id])
+  likedAt      DateTime @default(now())
 }
