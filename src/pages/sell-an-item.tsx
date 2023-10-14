@@ -33,10 +33,10 @@ const SellAnItem: NextPage = () => {
 	const router = useRouter();
 
 	const [step, setStep] = useState(1)
-	const [recentlyCreatedProduct, setRecentlyCreatedProduct] = useState(false)
-	const [timeUntilRedirect, setTimeUntilRedirect] = useState(5);
-	const [savingProduct, setSavingProduct] = useState(false)
-	const [intervalRef, setIntervalRef] = useState(null)
+	const [recentlyCreatedProduct, setRecentlyCreatedProduct] = useState<boolean>(false)
+	const [timeUntilRedirect, setTimeUntilRedirect] = useState<number | 0>(5);
+	const [savingProduct, setSavingProduct] = useState<boolean>(false)
+	const [intervalRef, setIntervalRef] = useState<NodeJS.Timer | null>(null);
 
 	const { register, handleSubmit } = useForm<SellItemForm>();
 	const onSubmit = (formData: SellItemForm) => {

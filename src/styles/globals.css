@@ -163,7 +163,50 @@ html {
   border: 1px solid #eee;
   padding: 20px;
   background-color: #fff;
+  min-width: 460px;
+  width: 460px;
+  display: inline-block;
+  margin-right: 20px;
 }
+
+.product-card:last-child {
+  margin-right: 0;
+}
+
+.products-horizontal-scroll-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  width: 100%;
+  position: relative !important;
+  scroll-behavior: smooth;
+}
+
+.products-horizontal-scroll-wrapper p {
+  white-space:normal;
+}
+
+.faded {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  height: calc(100% - 4px);
+  margin-top: 2px;
+  width: 100px;
+  border-radius: 30px;
+  overflow: hidden;
+  background: linear-gradient(270deg,#FFFFFF 20.96%,rgba(255,255,255,0) 95.93%);
+}
+
+.products-horizontal-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.products-horizontal-scroll-wrapper {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+} 
 
 .card-header {
   display: flex;
@@ -263,6 +306,7 @@ html {
   display: flex;
   align-items: center;
   column-gap: 10px;
+  padding-top: 20px;
 }
 
 .card {
@@ -850,4 +894,8 @@ h1.heading-text {
   font-weight: 500;
   color: #666666;
   margin-top: 10px;
+}
+
+.deals-wrapper {
+  width: 100%;
 }

@@ -47,7 +47,7 @@ export function NavBar() {
 							</div>
 						</Link>
 						<Tooltip anchorSelect="#offers" clickable place="right" style={{ backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px' }}>
-							<button>Show my offers</button>
+							<button>Show my deals</button>
 						</Tooltip>
 
 						<Link
@@ -60,7 +60,7 @@ export function NavBar() {
 							</div>
 						</Link>
 						<Tooltip anchorSelect="#sell" clickable place="right" style={{ backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px' }}>
-							<button>Start selling</button>
+							<button>List your application</button>
 						</Tooltip>
 
 					</>
