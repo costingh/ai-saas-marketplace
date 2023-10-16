@@ -183,7 +183,7 @@ html {
 }
 
 .products-horizontal-scroll-wrapper p {
-  white-space:normal;
+  white-space: normal;
 }
 
 .faded {
@@ -196,7 +196,11 @@ html {
   width: 100px;
   border-radius: 30px;
   overflow: hidden;
-  background: linear-gradient(270deg,#FFFFFF 20.96%,rgba(255,255,255,0) 95.93%);
+  background: linear-gradient(
+    270deg,
+    #ffffff 20.96%,
+    rgba(255, 255, 255, 0) 95.93%
+  );
 }
 
 .products-horizontal-scroll-wrapper::-webkit-scrollbar {
@@ -204,9 +208,9 @@ html {
 }
 
 .products-horizontal-scroll-wrapper {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-} 
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 .card-header {
   display: flex;
@@ -887,7 +891,7 @@ h1.heading-text {
   font-weight: 600;
   color: #111;
   margin-top: 20px;
-} 
+}
 
 .product-creation-confirmation-paragraph {
   font-size: 14px;
@@ -898,4 +902,118 @@ h1.heading-text {
 
 .deals-wrapper {
   width: 100%;
+  height: 100vh;
+}
+
+.chat-wrapper .w-30:first-child {
+  /* border-right: 1px solid #dddddd; */
+  background-color: #f3f3f3;
+}
+
+.w-30 {
+  width: 30%;
+  height: 100%;
+}
+
+.w-40 {
+  width: 40%;
+  height: 100%;
+}
+
+.chat-wrapper {
+  height: 100%;
+}
+
+.chat-wrapper .product-card {
+  width: 100%;
+  min-width: 100%;
+  padding: 10px 15px;
+  transition: all .2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.chat-wrapper .product-card .messages-notification-wrapper {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #eef2fe;
+  background-color: #5c57ecef;
+}
+
+.chat-wrapper .product-card:hover {
+  background-color: #ffffff7c;
+  border: 1px solid #5c57ec73;
+}
+
+.chat-wrapper .product-card .category-wrapper {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+}
+
+.chat-wrapper .product-card .title {
+  font-size: 13px;
+}
+
+.chat-wrapper .product-card .created-at {
+  font-size: 10px;
+}
+
+.chat-wrapper .product-card .label {
+  font-size: 8px;
+}
+
+.chat-wrapper .product-card .value {
+  font-size: 12px;
+}
+
+.chat-wrapper .product-card .description {
+  font-size: 12px;
+}
+
+.deals-wrapper .heading {
+  font-size: 14px;
+  color: #111;
+  font-weight: 600;
+  padding-bottom: 0px;
+}
+
+.listed-products-wrapper {
+  overflow-y: scroll;
+  padding: 20px;
+  height: calc(100% - 40px);
+
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.placeholder-chat-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.placeholder-chat-wrapper img {
+  max-width: 300px;
+  width: auto;
+  height: auto;
+  max-height: 300px;
+}
+
+.placeholder-chat-wrapper h1 {
+  font-size: 15px;
+  margin-top: 20px;
+  color: #888;
+  font-weight: 500;
 }

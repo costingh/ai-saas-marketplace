@@ -54,7 +54,7 @@ function Card({ listing, setProductDetails }: { listing: Listing, setProductDeta
                         <div className="title">
                             {listing.name}
                         </div>
-                        <span className="created-at">Listed at {moment(listing.createdAt).fromNow()}</span>
+                        <span className="created-at">Listed {moment(listing.createdAt).fromNow()}</span>
                     </div>
                 </div>
                 <div className="right">
