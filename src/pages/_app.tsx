@@ -11,7 +11,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   return (
     <ClerkProvider {...pageProps}>
       <div style={{display: 'flex', overflow: 'hidden'}}>
-        <NavBar />
+        {/* <NavBar /> */}
         <Component {...pageProps} />
       </div>
     </ClerkProvider>

@@ -38,15 +38,15 @@ export function NavBar() {
 				{user.isSignedIn && (
 					<>
 						<Link
-							href="/offers"
+							href="/deals"
 							aria-current="page"
-							id="offers"
+							id="deals"
 						>
-							<div className={`navbar-icon-wrapper ${router.pathname.includes('offers') && 'active'}`}>
+							<div className={`navbar-icon-wrapper ${router.pathname.includes('deals') && 'active'}`}>
 								<Icon icon='inbox' />
 							</div>
 						</Link>
-						<Tooltip anchorSelect="#offers" clickable place="right" style={{ backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px' }}>
+						<Tooltip anchorSelect="#deals" clickable place="right" style={{ backgroundColor: '#222', color: '#eee', borderRadius: '15px', fontSize: '12px', padding: '4px 10px' }}>
 							<button>Show my deals</button>
 						</Tooltip>
 
