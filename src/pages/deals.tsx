@@ -1,96 +1,112 @@
+import React, { useEffect, useState } from "react";
+
 import moment from "moment";
 import Head from "next/head";
-import Link from "next/link";
 import { type NextPage } from "next";
-import { type Listing } from "@prisma/client";
+import { useRouter } from 'next/router';
+import { useUser } from "@clerk/nextjs";
+
+import LocationService from "~/services/Location.service";
 
 import { api } from "~/utils/api";
 
 import Icon from "~/components/Icon";
-import { useRouter } from 'next/router';
-import { useEffect } from "react";
 import { NavBar } from "~/components/NavBar";
-
-const ListedProduct = ({ listing }: { listing: Listing }) => {
-	const router = useRouter();
-
-	const formatNumber = (num: number): string => {
-		if (!num) return num.toString();
-		if (num >= 1000) {
-			const suffixes = ["", "k", "M", "G", "T"];
-			const magnitude = Math.floor(Math.log10(num) / 3);
-			const roundedNum = (num / Math.pow(1000, magnitude)).toFixed(1);
-			return `${roundedNum}${suffixes[magnitude]}`;
-		}
-		return num.toString();
-	}
-
-	const addQueryParam = (q: string) => {
-		const currentPathname = router.pathname;
-
-		router.push({
-			pathname: currentPathname,
-			query: { chatId: q },
-		}, undefined, { shallow: true });
-	};
-
-	const openChat = () => {
-		addQueryParam(listing.id)
-	}
-
-	return (
-		<div className="product-card mb-4" onClick={openChat}>
-
-			<div className="messages-notification-wrapper">
-				4
-			</div>
-
-			<div className="card-header">
-				<div className="left">
-					<div className="category-wrapper">
-						<Icon icon='saas_icon' />
-					</div>
-					<div className="product-name">
-						<div className="title">
-							{listing.name}
-						</div>
-						<span className="created-at">Listed {moment(listing.createdAt).fromNow()}</span>
-					</div>
-				</div>
-				<div className="right gap-2">
-					<div className="d-block">
-						<div className="label" style={{ marginTop: 0 }}>ASKING PRICE</div>
-						<span className="value">${formatNumber(listing.price)}</span>
-					</div>
-
-					<div className="d-block" style={{ height: '62.5px' }}>
-						<div className="label" style={{ marginBottom: '8px', marginTop: '11px' }}>SAVES</div>
-						<div className="d-flex" style={{ alignItems: 'center', columnGap: '4px' }}>
-							<Icon icon='wishlist' size='xs' />
-							<span className="value">{formatNumber(listing?.likeCount)}</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div className="description" style={{ margin: 0 }}>
-				<p>{listing.description}</p>
-			</div>
-		</div>
-	)
-
-}
+import { ListedProduct } from "~/components/ListedProduct";
 
 const Home: NextPage = () => {
 	const messages = api.listings.getMessage.useQuery();
 	const listings = api.listings.list.useQuery();
-
 	const router = useRouter();
+	const auth = useUser();
+	const locationService = new LocationService(router);
 
+	const conversationsByListing: any[] = [];
+
+	messages.data?.forEach((message) => {
+		const { listingId, fromUser } = message;
+
+		const listingConversation = conversationsByListing.find(
+			(conversation) => conversation.listingId === listingId
+		);
+
+		if (!listingConversation) {
+			const newListingConversation = {
+				listingId: listingId,
+				conversations: [
+					{
+						fromUser: fromUser,
+						userName: message.fromUserName,
+						messages: [message],
+					},
+				],
+			};
+
+			conversationsByListing.push(newListingConversation);
+		} else {
+			const existingConversation = listingConversation.conversations.find(
+				(conversation: any) => conversation.fromUser === fromUser
+			);
+
+			if (!existingConversation) {
+				const newConversation = {
+					fromUser: fromUser,
+					userName: message.fromUserName,
+					messages: [message],
+				};
+
+				listingConversation.conversations.push(newConversation);
+			} else {
+				existingConversation.messages.push(message);
+			}
+		}
+	});
+
+	conversationsByListing.forEach((listingConversation) => {
+		const listingInfo = listings?.data?.find((listing: any) => listing.id === listingConversation.listingId);
+
+		if (listingInfo) {
+			listingConversation.listingInfo = listingInfo;
+		}
+	});
+
+	const [currentChat, setCurrentChat] = useState<any>(null)
 
 	useEffect(() => {
-		// console.log()
-	}, [router])
+		let _chat_id = router?.query?.listingId;
+		if (_chat_id) {
+			let chat = conversationsByListing.find(ch => ch.listingId == _chat_id);
+			setCurrentChat(chat)
+		}
+	}, [router?.query])
+
+	useEffect(() => {
+		let _conversationId = router?.query?.conversationId;
+		if (_conversationId) {
+			let _conversation = currentChat?.conversations?.find((conv: any) => conv.id == _conversationId)
+			console.log('==========')
+			console.log(_conversation)
+			setCurrentConversation(_conversation)
+		}
+
+	}, [router?.query, currentChat])
+
+
+	const dotDot = (str: string, maxLength: number): string => {
+		if (str.length <= maxLength) {
+			return str;
+		} else {
+			return `${str.slice(0, maxLength)}...`;
+		}
+	}
+
+	const [currentConversation, setCurrentConversation] = useState<any>(null)
+
+	const handleSetConversation = (_conversation: any) => {
+		setCurrentConversation(_conversation)
+		locationService.updateQueryParam('conversationId', _conversation.fromUser)
+	}
+
 	return (
 		<>
 			<Head>
@@ -98,30 +114,102 @@ const Home: NextPage = () => {
 				<meta name="description" content="Generated by create-t3-app" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-            <NavBar/>
+			<NavBar />
 			<main className="deals-wrapper">
 				<div className="flex flex-row chat-wrapper">
-					<div className="w-30">
-						<h1 className="heading p-6">Your listed products</h1>
+					<div className="listed_products_inbox_wrapper">
+						<div className="flex flex-row align-center gap-2 p-6">
+							<Icon icon="inbox_messages_list" />
+							<h1 className="heading ">Your inbox</h1>
+						</div>
 						<div className="listed-products-wrapper">
-							{listings?.data?.map((listing) => (
-								<ListedProduct key={listing.id} listing={listing} />
+							{conversationsByListing?.map((listing) => (
+								<ListedProduct key={listing?.listingId} conversations={listing?.conversations} listing={listing?.listingInfo} />
 							))}
 						</div>
 					</div>
 
-					{router?.query?.chatId &&
+					{router?.query?.listingId &&
 						<>
-							<div className="w-40">
-								
+							<div className="conversations-wrapper">
+								<div className="flex flex-row align-center gap-2 p-6">
+									<Icon icon="inbox_messages_list" />
+									<h1 className="heading">Your inbox</h1>
+								</div>
+								<div className="h-divider fluid"></div>
+								<div className="inner-conversations-wrapper">
+
+									{currentChat?.conversations?.map((conversation: any, idx: number) => (
+										<div className="conversation-tab" key={idx} onClick={() => handleSetConversation(conversation)}>
+											<div className="avatar">
+												<span>{conversation?.userName?.slice(0, 1)}</span>
+											</div>
+											<div className="flex flex-col" style={{ width: '100%' }}>
+												<div className="name">{conversation?.userName}</div>
+												<div className="flex justify-between">
+													<span>{dotDot(conversation?.messages[conversation?.messages?.length - 1]?.message, 20)}</span>
+													<span>{moment(conversation?.messages[conversation?.messages?.length - 1]?.deliveredAt).fromNow()}</span>
+												</div>
+											</div>
+										</div>
+									))}
+
+								</div>
 							</div>
-							<div className="w-30">
+							<div className="inner-chat-wrapper">
+								<div className="flex flex-row align-center space-between gap-2 p-6">
+									<div className="heading">{currentConversation?.userName}</div>
+									<div className="right">
+
+									</div>
+								</div>
+								<div className="h-divider fluid"></div>
+								<div className="messages-wrapper">
+									{currentConversation?.messages?.map((msg: any) => (
+										<React.Fragment key={msg.id}>
+											{
+												auth?.user?.id != msg.fromUser ? (
+													<div className="message left">
+														<div className="sender-avatar avatar">
+															<span>{msg.fromUserName.slice(0, 1)}</span>
+														</div>
+														<div className="inner-message">
+															<div className="message-text">{msg.message}</div>
+															<span className="message-timestamp">Sent · {moment(msg.deliveredAt).fromNow()}</span>
+														</div>
+													</div>
+												) : (
+													<div className="message right">
+														<div className="inner-message">
+															<div className="message-text">{msg.message}</div>
+															<span className="message-timestamp">Sent · {moment(msg.deliveredAt).fromNow()}</span>
+														</div>
+														<div className="sender-avatar avatar">
+															<span>{auth?.user?.username?.slice(0, 1)}</span>
+														</div>
+													</div>
+												)
+											}
+										</React.Fragment>
+									))}
+
+								</div>
+								<div className="send-message-wrapper">
+									<div className="inner-message-send flex flex-col">
+										<textarea name="message" id="" placeholder={currentConversation?.userName}></textarea>
+										<div className="flex space-between p-3">
+											<div className="send-message-btn ml-auto">Send</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div className="chat-details-wrapper">
 
 							</div>
 						</>
 					}
 
-					{!router?.query?.chatId &&
+					{!router?.query?.listingId &&
 						<>
 							<div className="w-70 placeholder-chat-wrapper">
 								<img src="./chat-placeholder.svg" alt="" />
