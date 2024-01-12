@@ -1,0 +1,194 @@
+const user = {
+  "pathRoot": "/me",
+  "id": "user_2WGW0dutsTKfFULM9zptkh105lP",
+  "externalId": null,
+  "username": "costingh",
+  "emailAddresses": [
+    {
+      "pathRoot": "/me/email_addresses",
+      "emailAddress": "cgheorghe0702@stud.acs.upb.ro",
+      "linkedTo": [
+        {
+          "pathRoot": "",
+          "id": "idn_2WGW0PL1aAO9A3MxCpIGN535ImX",
+          "type": "oauth_github"
+        }
+      ],
+      "id": "idn_2WGW0TWnvRqUN3KhcT1yFOo5vjG",
+      "verification": {
+        "pathRoot": "",
+        "status": "verified",
+        "strategy": "from_oauth_github",
+        "nonce": null,
+        "externalVerificationRedirectURL": null,
+        "attempts": null,
+        "expireAt": "2023-10-17T16:14:25.853Z",
+        "error": null
+      }
+    }
+  ],
+  "phoneNumbers": [],
+  "web3Wallets": [],
+  "externalAccounts": [
+    {
+      "pathRoot": "/me/external_accounts",
+      "providerUserId": "76535583",
+      "emailAddress": "cgheorghe0702@stud.acs.upb.ro",
+      "approvedScopes": "read:user user:email",
+      "firstName": "Costin",
+      "lastName": "",
+      "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvNzY1MzU1ODM/dj00IiwicyI6IjFRY0hQOVpOS21CbDdFUXIyaS9GdERNYktBVndBVC9zRU95bFpTWjhVZW8ifQ",
+      "username": "costingh",
+      "publicMetadata": {},
+      "label": null,
+      "verification": {
+        "pathRoot": "",
+        "status": "verified",
+        "strategy": "oauth_github",
+        "nonce": null,
+        "externalVerificationRedirectURL": null,
+        "attempts": null,
+        "expireAt": "2023-10-03T19:02:48.447Z",
+        "error": null
+      },
+      "id": "eac_2WGW0RQJRwjTc9GJZyFAAqUVnla",
+      "identificationId": "idn_2WGW0PL1aAO9A3MxCpIGN535ImX",
+      "provider": "github"
+    }
+  ],
+  "samlAccounts": [],
+  "organizationMemberships": [],
+  "passwordEnabled": false,
+  "firstName": "Costin",
+  "lastName": null,
+  "fullName": "Costin",
+  "primaryEmailAddressId": "idn_2WGW0TWnvRqUN3KhcT1yFOo5vjG",
+  "primaryEmailAddress": {
+    "pathRoot": "/me/email_addresses",
+    "emailAddress": "cgheorghe0702@stud.acs.upb.ro",
+    "linkedTo": [
+      {
+        "pathRoot": "",
+        "id": "idn_2WGW0PL1aAO9A3MxCpIGN535ImX",
+        "type": "oauth_github"
+      }
+    ],
+    "id": "idn_2WGW0TWnvRqUN3KhcT1yFOo5vjG",
+    "verification": {
+      "pathRoot": "",
+      "status": "verified",
+      "strategy": "from_oauth_github",
+      "nonce": null,
+      "externalVerificationRedirectURL": null,
+      "attempts": null,
+      "expireAt": "2023-10-17T16:14:25.853Z",
+      "error": null
+    }
+  },
+  "primaryPhoneNumberId": null,
+  "primaryPhoneNumber": null,
+  "primaryWeb3WalletId": null,
+  "primaryWeb3Wallet": null,
+  "imageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ2l0aHViL2ltZ18yV0dXMFowVWY1QnZYQXVWYzdmWUlVZ0ZXMzgifQ",
+  "hasImage": true,
+  "twoFactorEnabled": false,
+  "totpEnabled": false,
+  "backupCodeEnabled": false,
+  "publicMetadata": {},
+  "unsafeMetadata": {},
+  "createOrganizationEnabled": true,
+  "deleteSelfEnabled": true,
+  "lastSignInAt": "2023-10-11T14:25:58.910Z",
+  "updatedAt": "2023-10-11T14:25:58.935Z",
+  "createdAt": "2023-10-03T18:52:54.562Z",
+  "cachedSessionsWithActivities": null
+}
+
+const listing = {
+  "id": "clnm6elry0004xb7ks730uxqu",
+  "userId": "user_2WGW0dutsTKfFULM9zptkh105lP",
+  "createdAt": "2023-10-11T20:00:54.718Z",
+  "updatedAt": "2023-10-11T20:00:54.718Z",
+  "name": "aklsjdklajs",
+  "description": "united kingdom",
+  "price": 878,
+  "location": "united kingdom",
+  "ttm_profit": 987,
+  "ttm_revenue": 8798,
+  "team_size": 1221,
+  "date_founded": "2020-09-10",
+  "tech_stack": [
+    "asdas",
+    "dasdasdasda",
+    "sdasd"
+  ],
+  "business_model": "united kingdom",
+  "competitors": [
+    "united kingdom"
+  ],
+  "growth_opportunity": "united kingdom",
+  "assets": [
+    "asdas",
+    "dasdasdasda",
+    "sdasd"
+  ],
+  "reason_selling": "asdas,dasdasdasda,sdasd",
+  "financing": "asdasd",
+  "isLikedByUser": true,
+  "likeCount": 2
+}
+
+const data1 = {
+  "clnm6elry0004xb7ks730uxqu": {
+    "user_2W803gbckDu5kplluLJBsp6JE7O": {
+      "userName": "costin",
+      "messages": [
+        {
+          "id": "clnt7nz7g0007xbysswhw31uu",
+          "fromUser": "user_2W803gbckDu5kplluLJBsp6JE7O",
+          "fromUserName": "costin",
+          "listingId": "clnm6elry0004xb7ks730uxqu",
+          "message": "Salut, sunt interesat si eu de aklsjdklajs, crezi ca ne putem auzi candva?",
+          "deliveredAt": "2023-10-16T18:10:34.876Z"
+        }
+      ]
+    }
+  },
+  "clnnk5njc0008xbwrmx29cptl": {
+    "user_2WGW0dutsTKfFULM9zptkh105lP": {
+      "userName": "costingh",
+      "messages": [
+        {
+          "id": "clnpn8vdi0001xbse35sgr0s1",
+          "fromUser": "user_2WGW0dutsTKfFULM9zptkh105lP",
+          "fromUserName": "costingh",
+          "listingId": "clnnk5njc0008xbwrmx29cptl",
+          "message": "iti dau treisi da lei",
+          "deliveredAt": "2023-10-14T06:15:39.222Z"
+        }
+      ]
+    }
+  }
+}
+
+const data3 = [
+  {
+    "listingId": "clnm6elry0004xb7ks730uxqu"
+    "conversations": [
+      {
+        "fromUser": "user_2W803gbckDu5kplluLJBsp6JE7O",
+        "userName": "costin",
+        "messages": [
+          {
+            "id": "clnt7nz7g0007xbysswhw31uu",
+            "fromUser": "user_2W803gbckDu5kplluLJBsp6JE7O",
+            "fromUserName": "costin",
+            "listingId": "clnm6elry0004xb7ks730uxqu",
+            "message": "Salut, sunt interesat si eu de aklsjdklajs, crezi ca ne putem auzi candva?",
+            "deliveredAt": "2023-10-16T18:10:34.876Z"
+          }
+        ]
+      }
+    ]
+  }
+]

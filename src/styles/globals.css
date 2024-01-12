@@ -19,6 +19,13 @@
   --foreground-rgb: #f7f7f7;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
+  --shade-1:#d4ddf7;
+  --shade-2:#94a1ad;
+  --shade-3:#f6fbff;
+  --shade-4:#edf6ff;
+  --shade-5:#ffffff;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -50,6 +57,95 @@ html {
   display: flex;
 }
 
+/* ################################
+              HOMEPAGE
+###################################*/
+.homepage {
+  background-color: #04090f;
+  width: 100%;
+  height: 100vh;  
+}
+
+.landing-page-navbar {
+  width: 90%;
+  margin: 30px auto;
+  background-color: #0f1418;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 40px;
+  border-radius: 5px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  cursor: pointer;
+}
+
+.links .link {
+  color: #b1b3b8;
+  transition: all .2s ease;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.landing-page-navbar .logo span {
+  color: #b1b3b8;
+  transition: all .2s ease;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.landing-page-navbar .logo span:nth-child(1) {
+  color: #eee;
+}
+
+.landing-page-navbar .logo span:nth-child(2) {
+  color: #93ffa1;
+}
+
+.links .link:hover {
+  color: #bdbdbf;
+}
+
+.sign-up-btn {
+  color: #eee;
+  transition: all .2s ease;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.hero-section {
+  width: 90%;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.hero-section h1 span:nth-child(1 ){
+  color: #f7f7f7;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.hero-section h1 span:nth-child(3 ){
+  color: #b0b1b3;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+.hero-section h1 span:nth-child(4 ){
+  color: #88fca9;
+  font-size: 80px;
+  font-weight: 600;
+}
+
+/* ################################
+              DASHBOARD
+###################################*/
 .navbar {
   width: 100%;
   display: flex;
@@ -59,6 +155,7 @@ html {
   padding: 20px 5px;
   position: relative;
   row-gap: 10px;
+  z-index: 999;
   height: 100%;
   border-right: 1px solid #8888883b;
 }
@@ -1034,7 +1131,7 @@ h1.heading-text {
 }
 
 .conversation-tab {
-  background-color: #d4ddf7;
+  border: 1px solid #d4ddf7;
   padding: 10px;
   display: flex;
   /* align-items: center; */
@@ -1042,6 +1139,10 @@ h1.heading-text {
   column-gap: 10px;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.conversation-tab.active {
+  background-color: #d4ddf7;
 }
 
 .conversation-tab:hover {

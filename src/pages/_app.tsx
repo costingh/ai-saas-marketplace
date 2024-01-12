@@ -5,17 +5,15 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import 'react-tooltip/dist/react-tooltip.css'
-import { NavBar } from "~/components/NavBar";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
-  return (
-    <ClerkProvider {...pageProps}>
-      <div style={{display: 'flex', overflow: 'hidden'}}>
-        {/* <NavBar /> */}
-        <Component {...pageProps} />
-      </div>
-    </ClerkProvider>
-  );
+	return (
+		<ClerkProvider {...pageProps}>
+			<div style={{ display: 'flex', overflow: 'hidden' }}>
+				<Component {...pageProps} />
+			</div>
+		</ClerkProvider>
+	);
 };
 
 export default api.withTRPC(MyApp);

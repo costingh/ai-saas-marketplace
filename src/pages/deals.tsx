@@ -19,8 +19,9 @@ const Home: NextPage = () => {
 	const listings = api.listings.list.useQuery();
 	const router = useRouter();
 	const auth = useUser();
+	const [currentChat, setCurrentChat] = useState<any>(null)
+	const [currentConversation, setCurrentConversation] = useState<any>(null)
 	const locationService = new LocationService(router);
-
 	const conversationsByListing: any[] = [];
 
 	messages.data?.forEach((message) => {
@@ -70,24 +71,20 @@ const Home: NextPage = () => {
 		}
 	});
 
-	const [currentChat, setCurrentChat] = useState<any>(null)
-
 	useEffect(() => {
 		let _chat_id = router?.query?.listingId;
 		if (_chat_id) {
 			let chat = conversationsByListing.find(ch => ch.listingId == _chat_id);
 			setCurrentChat(chat)
 		}
-	}, [router?.query])
+	}, [router])
 
 	useEffect(() => {
 		let _conversationId = router?.query?.conversationId;
 		if (_conversationId) {
-			let _conversation = currentChat?.conversations?.find((conv: any) => conv.id == _conversationId)
-			console.log('==========')
-			console.log(_conversation)
+			let _conversation = currentChat?.conversations?.find((conv: any) => conv.fromUser == _conversationId)
 			setCurrentConversation(_conversation)
-		}
+		} else setCurrentConversation(null)
 
 	}, [router?.query, currentChat])
 
@@ -99,8 +96,6 @@ const Home: NextPage = () => {
 			return `${str.slice(0, maxLength)}...`;
 		}
 	}
-
-	const [currentConversation, setCurrentConversation] = useState<any>(null)
 
 	const handleSetConversation = (_conversation: any) => {
 		setCurrentConversation(_conversation)
@@ -140,7 +135,7 @@ const Home: NextPage = () => {
 								<div className="inner-conversations-wrapper">
 
 									{currentChat?.conversations?.map((conversation: any, idx: number) => (
-										<div className="conversation-tab" key={idx} onClick={() => handleSetConversation(conversation)}>
+										<div className={`conversation-tab ${conversation.fromUser == router?.query?.conversationId && 'active'}`} key={idx} onClick={() => handleSetConversation(conversation)}>
 											<div className="avatar">
 												<span>{conversation?.userName?.slice(0, 1)}</span>
 											</div>
